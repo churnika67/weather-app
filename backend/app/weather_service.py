@@ -109,6 +109,8 @@ async def fetch_current_weather(latitude: float, longitude: float) -> dict[str, 
         "latitude": latitude,
         "longitude": longitude,
         "current": "temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code",
+        "temperature_unit": "fahrenheit",
+        "wind_speed_unit": "mph",
         "timezone": "auto",
     }
     try:
@@ -132,6 +134,8 @@ async def fetch_forecast(latitude: float, longitude: float, start_date: date, en
         "latitude": latitude,
         "longitude": longitude,
         "daily": "weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max",
+        "temperature_unit": "fahrenheit",
+        "wind_speed_unit": "mph",
         "timezone": "auto",
         "start_date": start_date.isoformat(),
         "end_date": end_date.isoformat(),
