@@ -147,6 +147,9 @@ export default function App() {
   const place = current?.resolved_location || "San Francisco, California, USA";
   const temp = current ? `${Math.round(current.current_weather.temperature_2m)}°F`.replace("°F", "°") : "72°F";
   const cond = current?.current_weather.weather_condition || "Partly Cloudy";
+  const fullForecastUrl = current
+    ? `https://open-meteo.com/en/docs#latitude=${current.latitude}&longitude=${current.longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max&timezone=auto`
+    : "https://open-meteo.com/en/docs";
   const errorText = (error || "").toLowerCase();
   const showLocationNotFound = errorText.includes("not found") || errorText.includes("could not");
   const showNoInternet = errorText.includes("network") || errorText.includes("internet") || errorText.includes("failed to fetch");
@@ -207,7 +210,7 @@ export default function App() {
           <div className="right-actions">
             <button className="loc" onClick={useCurrent} disabled={loading}>Use Current Location</button>
             <button className="bell" onClick={showAlerts}>🔔</button>
-            <button className="jr" onClick={showProfile}>JR</button>
+            <button className="jr" onClick={showProfile}>MRC</button>
           </div>
         </header>
 
@@ -245,7 +248,12 @@ export default function App() {
             </article>
 
             <article className="block">
-              <div className="bhead"><h3>5-Day Forecast</h3><span>View full forecast →</span></div>
+              <div className="bhead">
+                <h3>5-Day Forecast</h3>
+                <a className="forecast-link" href={fullForecastUrl} target="_blank" rel="noreferrer">
+                  View full forecast →
+                </a>
+              </div>
               <div className="d5">
                 {fdays.map((d) => (
                   <div key={d.time} className="dcard">
