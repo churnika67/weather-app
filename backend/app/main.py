@@ -160,8 +160,17 @@ def custom_swagger_ui():
       }}
       .logo {{ font-size: 2rem; font-weight: 800; color: #fff; }}
       .tabs {{ display:flex; gap:1rem; }}
-      .tabs span {{ color:#b8caeb; font-weight:700; }}
-      .tabs .active {{ color:#fff; border-bottom:2px solid #57adff; padding-bottom:.2rem; }}
+      .tabs button {{
+        background: transparent;
+        border: 0;
+        color:#b8caeb;
+        font-weight:700;
+        font: inherit;
+        cursor: pointer;
+        padding: 0 0 .2rem;
+      }}
+      .tabs button.active {{ color:#fff; border-bottom:2px solid #57adff; }}
+      .tabs button:hover {{ color:#e7f2ff; }}
       .badge {{ border:1px solid #3f6fb5; border-radius:999px; padding:.45rem .8rem; color:#fff; font-weight:700; background:rgba(255,255,255,.12); }}
       .search {{
         background:#fff;
@@ -195,7 +204,13 @@ def custom_swagger_ui():
     <div class="app">
       <header class="top">
         <div class="logo">☁ Atmosphere</div>
-        <div class="tabs"><span class="active">Weather</span><span>Maps</span><span>Alerts</span><span>News</span><span>Travel</span></div>
+        <div class="tabs">
+          <button class="active" onclick="window.scrollTo({{top:0,behavior:'smooth'}})">Weather</button>
+          <button onclick="window.open('https://www.google.com/maps','_blank','noopener,noreferrer')">Maps</button>
+          <button onclick="window.open('https://www.weather.gov/alerts','_blank','noopener,noreferrer')">Alerts</button>
+          <button onclick="window.open('https://news.google.com/search?q=weather','_blank','noopener,noreferrer')">News</button>
+          <button onclick="window.open('https://www.google.com/search?q=travel+weather','_blank','noopener,noreferrer')">Travel</button>
+        </div>
         <span class="badge">Developer Portal</span>
       </header>
       <div class="search">Interactive API Console for current weather, forecast, CRUD records, and exports</div>
