@@ -52,7 +52,27 @@ def _optional_headers() -> dict[str, str]:
 
 
 async def resolve_location(location: str) -> dict[str, Any]:
-    params = {"name": location, "count": 1, "language": "en", "format": "json"}
+    raw = location.strip()
+    parts = [p.strip() for p in raw.split(",")]
+    if len(parts) == 2:
+        try:
+            latitude = float(parts[0])
+            longitude = float(parts[1])
+        except ValueError:
+            latitude = None
+            longitude = None
+        if latitude is not None and longitude is not None:
+            if not (-90 <= latitude <= 90):
+                raise HTTPException(status_code=400, detail="Latitude must be between -90 and 90")
+            if not (-180 <= longitude <= 180):
+                raise HTTPException(status_code=400, detail="Longitude must be between -180 and 180")
+            return {
+                "resolved_location": f"{latitude:.4f}, {longitude:.4f}",
+                "latitude": latitude,
+                "longitude": longitude,
+            }
+
+    params = {"name": raw, "count": 1, "language": "en", "format": "json"}
     try:
         async with httpx.AsyncClient(timeout=20) as client:
             response = await client.get(GEOCODE_URL, params=params, headers=_optional_headers())
