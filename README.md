@@ -1,7 +1,5 @@
 # Real-Time Weather App (Full-Stack)
 
-**Candidate:** Marappa Reddy Churnika  
-**Assessment Completed:** Full Stack Weather App - Tech Assessment #1 and #2
 
 ## Project Title
 Real-Time Weather App (Frontend + Backend)
@@ -161,23 +159,3 @@ curl -X DELETE http://127.0.0.1:8001/api/weather-records/1
 curl http://127.0.0.1:8001/api/export/json
 curl http://127.0.0.1:8001/api/export/csv
 ```
-
-## PM Accelerator Section
-The frontend includes a dedicated PM Accelerator informational card and explicit candidate attribution:
-**Marappa Reddy Churnika**.
-
-## Demo Video Checklist (1-2 min)
-- Show project structure
-- Start backend + frontend
-- Show weather search + geolocation
-- Show current weather + forecast
-- Show Save to DB + JSON/CSV save actions
-- Show CRUD operations via `/docs`
-- Show JSON and CSV exports
-- Show PM Accelerator section
-
-## GitHub Submission Notes
-- Keep `.env`, `node_modules`, `__pycache__`, and local DB artifacts uncommitted
-- Push only source files and docs
-- Verify run commands from a fresh clone
-- Add demo video link in submission
